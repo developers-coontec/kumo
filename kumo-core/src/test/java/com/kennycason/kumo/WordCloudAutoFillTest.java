@@ -24,7 +24,7 @@ import java.util.List;
     */
 public class WordCloudAutoFillTest {
 
-    
+
     /**
      * we have four test cases, and they are being applied to the test the
      * issue of word too few, autofill, default fill, and directly dealing
@@ -35,7 +35,7 @@ public class WordCloudAutoFillTest {
     private static final String INPUT_PATH ="backgrounds/whale.png";
     private static final String DEFAULT_FONT = "Impact";
     private static final String DEFAULT_IMAGE_TYPE = "png";
-    
+
     /** This method is for testing the picture of "output_test/a_whale_word_too_few.png"
      * @throws IOException
      */
@@ -69,13 +69,13 @@ public class WordCloudAutoFillTest {
         wordCloud.build(wordFrequencies);
         wordCloud.writeToFile("output_test/a_whale_word_too_few.png");
     }
-    
+
     /**
      * This method is for when there are no word after be filtered with
      * the Custom autofill test
      * @throws IOException
      */
-    
+
     @Test
     public void whaleImgNoWordAfterFilterWithCustomAutoFillTest() throws IOException {
         final FrequencyAnalyzer frequencyAnalyzer = new FrequencyAnalyzer();
@@ -105,12 +105,12 @@ public class WordCloudAutoFillTest {
         wordCloud.build(wordFrequencies);
         wordCloud.writeToFile("output_test/a_whale_no_word_with_dararara.png");
     }
-    
+
     /**
      * This method is for when there are no word after be filtered with
      * the default autofill test
      * @throws IOException
-     * 
+     *
      */
     //CS304 Issue Link:
     //https://github.com/kennycason/kumo/issues/93
@@ -145,7 +145,7 @@ public class WordCloudAutoFillTest {
         wordCloud.build(wordFrequencies);
         wordCloud.writeToFile("output_test/a_whale_no_word_with_default_autofill.png");
     }
-    
+
     /**
      * This method is for the image of whale when manually add more duplicated
      * words
@@ -188,12 +188,12 @@ public class WordCloudAutoFillTest {
         wordCloud.build(wordFrequencies);
         wordCloud.writeToFile("output_test/a_whale_with_string_list.png");
     }
-    
+
     /**
      * This method is for loading the stop words
      * @return
      */
-    
+
     private static Set<String> loadStopWords() {
         try {
             final List<String> lines = IOUtils.readLines(getInputStream("text/stop_words.txt"));
@@ -208,7 +208,6 @@ public class WordCloudAutoFillTest {
     private static InputStream getInputStream(final String path) {
         return Thread.currentThread().getContextClassLoader().getResourceAsStream(path);
     }
-}
 
     //CS304 (manually written) issue link:
     //https://github.com/kennycason/kumo/issues/93
