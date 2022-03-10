@@ -217,7 +217,7 @@ public class MyWordCloudTest {
     wordCloud.setPadding(1);
     wordCloud.setBackground(new RectangleBackground(dimension));
     // wordCloud.setAngleGenerator(new AngleGenerator(-60, 60, 5));
-    wordCloud.setColorPalette(buildRandomColorPalette(5));
+    wordCloud.setColorPalette(buildRandomColorPalette(1));
     wordCloud.setKumoFont(AppleSDGothicNeoB);
     wordCloud.setFontScalar(new LinearFontScalar(18, 70));
 //        wordCloud.build(wordFrequencies);
@@ -240,7 +240,9 @@ public class MyWordCloudTest {
 //    wordCloud.setFontScalar(new LinearFontScalar(18, 70));
 //        wordCloud.build(wordFrequencies);
 //    wordCloud.writeToFile("output/custom_load_text.png");
-    CustomWordCloud customWordCloud = new CustomWordCloud(CustomWordCloud.readLinesFromInputStream(getInputStream("text/korean_text.txt")), 400, 400, 5);
+    CustomWordCloud customWordCloud = new CustomWordCloud(300, 300, 1);
+//    customWordCloud.loadContents(CustomWordCloud.readLinesFromInputStream(getInputStream("text/korean_text.txt")));
+    customWordCloud.loadContentsWithFrequencies(WORD_FREQUENCIES);
     customWordCloud.writeToFile("output/custom_load_text.png");
   }
 
