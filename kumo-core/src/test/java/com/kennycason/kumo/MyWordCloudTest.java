@@ -4,12 +4,13 @@ import com.kennycason.kumo.bg.CircleBackground;
 import com.kennycason.kumo.bg.PixelBoundaryBackground;
 import com.kennycason.kumo.bg.RectangleBackground;
 import com.kennycason.kumo.examples.WordCloudITest;
-import com.kennycason.kumo.font.FontWeight;
 import com.kennycason.kumo.font.KumoFont;
 import com.kennycason.kumo.font.scale.LinearFontScalar;
 import com.kennycason.kumo.font.scale.SqrtFontScalar;
+import com.kennycason.kumo.image.AngleGenerator;
 import com.kennycason.kumo.nlp.FrequencyAnalyzer;
 import com.kennycason.kumo.palette.ColorPalette;
+import com.kennycason.kumo.wordstart.CenterWordStart;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.io.IOException;
@@ -81,16 +82,6 @@ public class MyWordCloudTest {
   }
 
 
-  private static ColorPalette buildRandomColorPalette(final int n) {
-    final Color[] colors = new Color[n];
-    for (int i = 0; i < colors.length; i++) {
-      colors[i] = new Color(RANDOM.nextInt(230) + 25, RANDOM.nextInt(230) + 25,
-          RANDOM.nextInt(230) + 25);
-    }
-    return new ColorPalette(colors);
-  }
-
-
   @Test
   public void matchOnlineExample() throws IOException {
     loadFonts();
@@ -104,7 +95,7 @@ public class MyWordCloudTest {
     wordCloud.setPadding(1);
     wordCloud.setBackground(new CircleBackground(300));
     wordCloud.setBackgroundColor(Color.WHITE);
-    wordCloud.setColorPalette(buildRandomColorPalette(2));
+    wordCloud.setColorPalette(CustomWordCloud.buildRandomColorPalette(2));
 //    wordCloud.setKumoFont(new KumoFont("Helvitica", FontWeight.PLAIN));
     wordCloud.setKumoFont(AppleSDGothicNeoB);
     wordCloud.setFontScalar(new LinearFontScalar(8, 130));
@@ -128,7 +119,7 @@ public class MyWordCloudTest {
     wordCloud.setBackground(new RectangleBackground(dimension));
 //    wordCloud.setKumoFont(new KumoFont("Impact", FontWeight.PLAIN));
     // wordCloud.setAngleGenerator(new AngleGenerator(-60, 60, 5));
-    wordCloud.setColorPalette(buildRandomColorPalette(5));
+    wordCloud.setColorPalette(CustomWordCloud.buildRandomColorPalette(5));
     wordCloud.setKumoFont(AppleSDGothicNeoB);
     wordCloud.setFontScalar(new LinearFontScalar(18, 70));
 //        wordCloud.build(wordFrequencies);
@@ -195,7 +186,7 @@ public class MyWordCloudTest {
     final WordCloud wordCloud = new WordCloud(dimension, CollisionMode.RECTANGLE);
     wordCloud.setPadding(0);
     wordCloud.setBackground(new CircleBackground(300));
-    wordCloud.setColorPalette(buildRandomColorPalette(20));
+    wordCloud.setColorPalette(CustomWordCloud.buildRandomColorPalette(20));
     wordCloud.setKumoFont(AppleSDGothicNeoB);
     wordCloud.setFontScalar(new LinearFontScalar(10, 40));
     wordCloud.build(WORD_FREQUENCIES);
@@ -217,7 +208,10 @@ public class MyWordCloudTest {
     wordCloud.setPadding(1);
     wordCloud.setBackground(new RectangleBackground(dimension));
     // wordCloud.setAngleGenerator(new AngleGenerator(-60, 60, 5));
-    wordCloud.setColorPalette(buildRandomColorPalette(1));
+    wordCloud.setAngleGenerator(new AngleGenerator(0, 0, 3));
+    wordCloud.setWordStartStrategy(new CenterWordStart());
+    wordCloud.setBackgroundColor(Color.WHITE);
+    wordCloud.setColorPalette(CustomWordCloud.buildRandomColorPalette(1));
     wordCloud.setKumoFont(AppleSDGothicNeoB);
     wordCloud.setFontScalar(new LinearFontScalar(18, 70));
 //        wordCloud.build(wordFrequencies);
