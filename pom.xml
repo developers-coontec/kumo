@@ -29,6 +29,29 @@
         <automatic.module.name>${project.groupId}.${project.artifactId}</automatic.module.name>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>jboss-mixed-repository</id>
+            <name>JBoss Mixed Repository</name>
+            <url>https://maven.meback.ai/repository/maven-mixed/</url>
+        </repository>
+<!--        <repository>-->
+<!--            <id>central</id>-->
+<!--            <name>Central Repository</name>-->
+<!--            <url>https://repo.maven.apache.org/maven2</url>-->
+<!--        </repository>-->
+<!--        <repository>-->
+<!--            <id>jcenter</id>-->
+<!--            <name>jcenter Repository</name>-->
+<!--            <url>https://jcenter.bintray.com</url>-->
+<!--        </repository>-->
+        <repository>
+            <id>jitpack</id>
+            <name>jitpack Repository</name>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
     <dependencyManagement>
         <dependencies>
             <!-- kumo -->
@@ -154,10 +177,11 @@
   </scm>
 
     <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
+        <repository>
+            <id>jboss-mixed-repository</id>
+            <name>JBoss Mixed Repository</name>
+            <url>https://maven.meback.ai/repository/maven-mixed/</url>
+        </repository>
     </distributionManagement>
 
     <profiles>

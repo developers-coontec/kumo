@@ -5,6 +5,7 @@ import com.kennycason.kumo.font.KumoFont;
 import com.kennycason.kumo.font.scale.LinearFontScalar;
 import com.kennycason.kumo.image.AngleGenerator;
 import com.kennycason.kumo.nlp.FrequencyAnalyzer;
+import com.kennycason.kumo.nlp.tokenizer.core.KomoranWordTokenizer;
 import com.kennycason.kumo.palette.ColorPalette;
 import com.kennycason.kumo.wordstart.CenterWordStart;
 import java.awt.Color;
@@ -50,6 +51,7 @@ public class CustomWordCloud {
 
   public void loadContents(List<String> contents) {
     final FrequencyAnalyzer frequencyAnalyzer = new FrequencyAnalyzer();
+    frequencyAnalyzer.setWordTokenizer(new KomoranWordTokenizer());
     final List<WordFrequency> wordFrequencies = frequencyAnalyzer.load(contents);
     wordCloud.build(wordFrequencies);
   }
