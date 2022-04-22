@@ -241,7 +241,7 @@ public class MyWordCloudTest {
   }
 
   @Test
-  public void loadFromText2() throws IOException{
+  public void loadFromTextWithKomoranTokenizer() throws IOException{
 //    loadFonts();
 //    final FrequencyAnalyzer frequencyAnalyzer = new FrequencyAnalyzer();
 //    final List<WordFrequency> wordFrequencies = frequencyAnalyzer.load(getInputStream("text/korean_text.txt"));
@@ -256,9 +256,30 @@ public class MyWordCloudTest {
 //        wordCloud.build(wordFrequencies);
 //    wordCloud.writeToFile("output/custom_load_text.png");
     CustomWordCloud customWordCloud = new CustomWordCloud(300, 300, 1);
-    customWordCloud.loadContents(CustomWordCloud.readLinesFromInputStream(getInputStream("text/korean_text.txt")));
+    customWordCloud.loadContentsWithKomoranTokenizer(CustomWordCloud.readLinesFromInputStream(getInputStream("text/korean_text.txt")), 2, null);
 //    customWordCloud.loadContentsWithFrequencies(WORD_FREQUENCIES);
-    customWordCloud.writeToFile("output/custom_load_text.png");
+    customWordCloud.writeToFile("output/custom_load_text_komoran.png");
+  }
+
+  @Test
+  public void loadFromTextWithTwitterTokenizer() throws IOException{
+//    loadFonts();
+//    final FrequencyAnalyzer frequencyAnalyzer = new FrequencyAnalyzer();
+//    final List<WordFrequency> wordFrequencies = frequencyAnalyzer.load(getInputStream("text/korean_text.txt"));
+//    final Dimension dimension = new Dimension(400, 400);
+//    final WordCloud wordCloud = new WordCloud(dimension, CollisionMode.PIXEL_PERFECT);
+//    wordCloud.setPadding(1);
+//    wordCloud.setBackground(new RectangleBackground(dimension));
+//    // wordCloud.setAngleGenerator(new AngleGenerator(-60, 60, 5));
+//    wordCloud.setColorPalette(buildRandomColorPalette(5));
+//    wordCloud.setKumoFont(AppleSDGothicNeoB);
+//    wordCloud.setFontScalar(new LinearFontScalar(18, 70));
+//        wordCloud.build(wordFrequencies);
+//    wordCloud.writeToFile("output/custom_load_text.png");
+    CustomWordCloud customWordCloud = new CustomWordCloud(300, 300, 1);
+    customWordCloud.loadContentsWithTwitterTokenizer(CustomWordCloud.readLinesFromInputStream(getInputStream("text/korean_text.txt")), 2, null);
+//    customWordCloud.loadContentsWithFrequencies(WORD_FREQUENCIES);
+    customWordCloud.writeToFile("output/custom_load_text_twitter.png");
   }
 
 }

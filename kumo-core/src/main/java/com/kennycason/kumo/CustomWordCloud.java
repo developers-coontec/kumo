@@ -5,7 +5,9 @@ import com.kennycason.kumo.font.KumoFont;
 import com.kennycason.kumo.font.scale.LinearFontScalar;
 import com.kennycason.kumo.image.AngleGenerator;
 import com.kennycason.kumo.nlp.FrequencyAnalyzer;
+import com.kennycason.kumo.nlp.tokenizer.api.WordTokenizer;
 import com.kennycason.kumo.nlp.tokenizer.core.KomoranWordTokenizer;
+import com.kennycason.kumo.nlp.tokenizer.core.TwitterWordTokenizer;
 import com.kennycason.kumo.palette.ColorPalette;
 import com.kennycason.kumo.wordstart.CenterWordStart;
 import java.awt.Color;
@@ -14,6 +16,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Collections;
@@ -49,16 +52,47 @@ public class CustomWordCloud {
   public CustomWordCloud() {
   }
 
-  public void loadContents(List<String> contents) {
-    final FrequencyAnalyzer frequencyAnalyzer = new FrequencyAnalyzer();
-    frequencyAnalyzer.setWordTokenizer(new KomoranWordTokenizer());
-    final List<WordFrequency> wordFrequencies = frequencyAnalyzer.load(contents);
-    wordCloud.build(wordFrequencies);
-  }
-
   public void loadContentsWithFrequencies(List<WordFrequency> wordFrequencies) {
     wordCloud.build(wordFrequencies);
   }
+
+  public void loadContents(WordTokenizer tokenizer, List<String> contents, int minimumFrequency,
+      Integer topLimit) {
+    final FrequencyAnalyzer frequencyAnalyzer = new FrequencyAnalyzer();
+    frequencyAnalyzer.setWordTokenizer(tokenizer);
+    final List<WordFrequency> wordFrequencies = frequencyAnalyzer.load(contents);
+    List<WordFrequency> resultFrequencies = new ArrayList<>();
+    for (WordFrequency wordFrequency : wordFrequencies) {
+      if (minimumFrequency <= wordFrequency.getFrequency()) {
+        resultFrequencies.add(wordFrequency);
+      }
+    }
+    if (topLimit != null) {
+      resultFrequencies = frequencyAnalyzer.takeTopFrequencies(
+          resultFrequencies, topLimit);
+    }
+    System.out.println(resultFrequencies.toString());
+    loadContentsWithFrequencies(resultFrequencies);
+  }
+
+  public void loadContentsWithKomoranTokenizer(List<String> contents) {
+    this.loadContentsWithKomoranTokenizer(contents, 1, null);
+  }
+
+  public void loadContentsWithKomoranTokenizer(List<String> contents, int minimumFrequency,
+      Integer topLimit) {
+    loadContents(new KomoranWordTokenizer(), contents, minimumFrequency, topLimit);
+  }
+
+  public void loadContentsWithTwitterTokenizer(List<String> contents) {
+    this.loadContentsWithTwitterTokenizer(contents, 1, null);
+  }
+
+  public void loadContentsWithTwitterTokenizer(List<String> contents, int minimumFrequency,
+      Integer topLimit) {
+    loadContents(new TwitterWordTokenizer(), contents, minimumFrequency, topLimit);
+  }
+
 
   public String writeToBase64String() {
     final ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -103,20 +137,20 @@ public class CustomWordCloud {
 
 
   private static final List<Color> WORD_CLOUD_COLORS = Arrays.asList(
-      new Color(39,190,182), // tealish
-      new Color(30,175,216), // blue
-      new Color(247,214,0), //sunflower-yellow
-      new Color(244,174,26), // squash
-      new Color(243,107,40), // dusty-orange
-      new Color(239,73,36), // tomato
-      new Color(238,47, 68), // strawberry
-      new Color(184,86,161), // ugly-purple
+      new Color(39, 190, 182), // tealish
+      new Color(30, 175, 216), // blue
+      new Color(247, 214, 0), //sunflower-yellow
+      new Color(244, 174, 26), // squash
+      new Color(243, 107, 40), // dusty-orange
+      new Color(239, 73, 36), // tomato
+      new Color(238, 47, 68), // strawberry
+      new Color(184, 86, 161), // ugly-purple
       new Color(145, 91, 166), // dark-lilac
-      new Color(41,56,98), // dark-grey-blue
-      new Color(81,139,201), // cool-blue
-      new Color(103,191,107), // soft-green
-      new Color(161,205,73) // booger
-      );
+      new Color(41, 56, 98), // dark-grey-blue
+      new Color(81, 139, 201), // cool-blue
+      new Color(103, 191, 107), // soft-green
+      new Color(161, 205, 73) // booger
+  );
 
   public static ColorPalette buildRandomColorPalette(final int n) {
     final Color[] colors = new Color[n];

@@ -140,11 +140,11 @@ public class FrequencyAnalyzer {
 
         return takeTopFrequencies(wordFrequencies);
     }
-    
+
     public List<WordFrequency> loadWordFrequencies(final List<WordFrequency> wordFrequencies) {
         return takeTopFrequencies(wordFrequencies);
     }
-    
+
     private Map<String, Integer> buildWordFrequencies(final List<String> texts, final WordTokenizer tokenizer) {
         return texts.stream()
                     .map(tokenizer::tokenize)
@@ -176,6 +176,14 @@ public class FrequencyAnalyzer {
                 .sorted(WordFrequency::compareTo)
                 .limit(wordFrequenciesToReturn)
                 .collect(Collectors.toList());
+    }
+
+    public List<WordFrequency> takeTopFrequencies(final Collection<WordFrequency> wordCloudEntities, int limit) {
+        return wordCloudEntities
+            .stream()
+            .sorted(WordFrequency::compareTo)
+            .limit(limit)
+            .collect(Collectors.toList());
     }
 
     public void setStopWords(final Collection<String> stopWords) {

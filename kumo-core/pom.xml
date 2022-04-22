@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.kennycason</groupId>
         <artifactId>kumo</artifactId>
-        <version>1.29.1-SNAPSHOT</version>
+        <version>1.29.2</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -58,7 +58,11 @@
             <artifactId>komoran-core</artifactId>
             <version>1.0.1</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.twitter.penguin</groupId>
+            <artifactId>korean-text</artifactId>
+            <version>4.4.6</version>
+        </dependency>
         <!-- test -->
         <dependency>
             <groupId>junit</groupId>
