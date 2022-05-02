@@ -137,7 +137,6 @@ public class CustomWordCloud {
 
 
   private static final List<Color> WORD_CLOUD_COLORS = Arrays.asList(
-      new Color(39, 190, 182), // tealish
       new Color(30, 175, 216), // blue
       new Color(247, 214, 0), //sunflower-yellow
       new Color(244, 174, 26), // squash
@@ -148,14 +147,17 @@ public class CustomWordCloud {
       new Color(145, 91, 166), // dark-lilac
       new Color(41, 56, 98), // dark-grey-blue
       new Color(81, 139, 201), // cool-blue
+      new Color(39, 190, 182), // tealish
       new Color(103, 191, 107), // soft-green
       new Color(161, 205, 73) // booger
   );
 
   public static ColorPalette buildRandomColorPalette(final int n) {
     final Color[] colors = new Color[n];
+    List<Color> newList = new ArrayList<>(WORD_CLOUD_COLORS);
+    Collections.shuffle(newList);
     for (int i = 0; i < colors.length; i++) {
-      colors[i] = WORD_CLOUD_COLORS.get(i);
+      colors[i] = newList.get((i % WORD_CLOUD_COLORS.size()));
     }
     return new ColorPalette(colors);
   }
