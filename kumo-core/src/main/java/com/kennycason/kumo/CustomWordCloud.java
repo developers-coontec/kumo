@@ -71,7 +71,7 @@ public class CustomWordCloud {
       resultFrequencies = frequencyAnalyzer.takeTopFrequencies(
           resultFrequencies, topLimit);
     }
-    System.out.println(resultFrequencies.toString());
+    LOGGER.debug(resultFrequencies.toString());
     loadContentsWithFrequencies(resultFrequencies);
   }
 

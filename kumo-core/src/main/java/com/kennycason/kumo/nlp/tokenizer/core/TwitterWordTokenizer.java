@@ -25,7 +25,7 @@ public class TwitterWordTokenizer implements WordTokenizer {
         stemmed);
     List<String> tokenStringList = new ArrayList<>();
     for (KoreanTokenJava javaToken : javaTokens) {
-//      System.out.println(javaToken.toString());
+//      LOGGER.debug((javaToken.toString());
 //      if (KoreanPosJava.Noun.equals(javaToken.getPos()) ||
 //          KoreanPosJava.ProperNoun.equals(javaToken.getPos()) ||
 //          KoreanPosJava.Determiner.equals(javaToken.getPos()) ||

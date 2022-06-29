@@ -43,11 +43,11 @@ public class KomoranWordTokenizer implements WordTokenizer {
 //    List<String> tokenStringList = new ArrayList<>();
 //    for (Token oneToken : tokenList) {
 //      LOGGER.debug(oneToken.toString());
-//      System.out.println(oneToken.toString());
+//      LOGGER.debug((oneToken.toString());
 //      tokenStringList.add(oneToken.getMorph());
 //    }
 //    for (String oneString : tokenStringList){
-//      System.out.println(oneString);
+//      LOGGER.debug((oneString);
 //    }
     return tokenStringList;
   }
